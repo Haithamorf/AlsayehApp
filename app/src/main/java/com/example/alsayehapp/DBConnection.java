@@ -1,0 +1,27 @@
+package com.example.alsayehapp;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DBConnection extends SQLiteOpenHelper {
+    public static final String DbName = "mystudent.db";//database name
+    public static final int Verson = 1;
+    public DBConnection(Context context){
+        super(context,DbName,null,Verson);
+    }
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        //db.execSQL("create table IF NOT EXISTS admin (id INTEGER primary key, name TEXT)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //db.execSQL("Drop table if EXISTS admin");
+        onCreate(db);
+    }
+
+    //public void insertRowAdmin(...){}
+
+    //public ArrayList getAllrecord(){return ...;}
+}
