@@ -5,21 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
+
 //import android.os.strictmode.InstanceCountViolation;
 
 public class DBConnection extends SQLiteOpenHelper {
-    //Al-Sayeh.db
-    // C:\Users\win10\Al-Sayeh.db
+
 
       public static final String DbName = "Al-Sayeh.db"; //database name
     public static final int Verson = 1; // Verson number
-
-    //Constructor
     public DBConnection(Context context){
         super(context,DbName,null,Verson);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table IF NOT EXISTS Comment (Comment_Num TEXT , Sender TEXT, Receiver TEXT, Content TEXT, Date INTEGER )");
@@ -568,7 +566,7 @@ public void insertRowItem_ID(String Item_ID) {
 
 
 // Read Comment_Num from Table Comment
-     public ArrayList getAllrecord() {
+     public ArrayList getAllrecordComment_Num() {
 
          ArrayList arrayList =new ArrayList;
          SQLiteDatabase db = this.getReadableDatabase();
@@ -580,6 +578,15 @@ public void insertRowItem_ID(String Item_ID) {
         }
         return arrayList;
     }
+
+
+    // Delete Comment_Num from Table Comment
+public void deletRowComment_Num(String CommentNum){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from Comment where Comment_Num = CommentNum ");
+}
+
+//
 
 
 
