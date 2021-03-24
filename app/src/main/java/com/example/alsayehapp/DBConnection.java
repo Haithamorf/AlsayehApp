@@ -565,29 +565,311 @@ public void insertRowItem_ID(String Item_ID) {
     }
 
 
-// Read Comment_Num from Table Comment
-     public ArrayList getAllrecordComment_Num() {
+    // Delete  Comment by Comment_Num
+public void deleteComment(String CommentNum){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from Comment where Comment_Num = CommentNum ");
+}
 
-         ArrayList arrayList =new ArrayList();
-         SQLiteDatabase db = this.getReadableDatabase();
-         Cursor res = db.rawQuery("select * from Comment",null);
+//Delete Context Filtering Rate by Person_ID
+public void deleteContextFilteringRate(String Person_ID){
+    SQLiteDatabase db = this.getWritableDatabase();
+    db.execSQL("delete from ContextFilteringRate where Person_ID = Person_ID ");
+}
+    //Delete Guide Tourism by ID
+    public void deleteGuideTourism(String ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from GuideTourism where ID = ID ");
+    }
+    //Delete GuideTourismPlan by Plan_ID
+    public void deleteGuideTourismPlan(String Plan_ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from GuideTourismPlan where Plan_ID = Plan_ID ");
+    }
+    //Delete Place by Plan_ID
+    public void deletePlace(String Plan_ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from Place where Plan_ID = Plan_ID ");
+    }
+    //Delete Previous Trip by Plan_ID
+    public void deletePreviousTrip(String Plan_ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from PreviousTrip where Plan_ID = Plan_ID ");
+    }
+    //Delete Rate Person by Person_ID
+    public void deleteRatePerson(String Person_ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from RatePerson where Person_ID = Person_ID ");
+    }
+    //Delete Rate Place by Person_ID
+    public void deleteRatePlace(String Person_ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from RatePlace where Person_ID = Person_ID ");
+    }
+    //Delete Rate Plan by Person_ID
+    public void deleteRatePlan(String Person_ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from RatePlan where Person_ID = Person_ID ");
+    }
+    //Delete Reservation by Guide_Tourism_ID
+    public void deleteReservation(String Guide_Tourism_ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from Reservation where Guide_Tourism_ID = Guide_Tourism_ID ");
+    }
+    //Delete Tourist by Guide_Tourism_ID
+    public void deleteTourist(String ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from Tourist where ID = ID ");
+    }
 
-        while (res.isAfterLast()==false) {
-            arrayList.add(res.getString(res.getColumnIndex("Comment_Num")));
-            res.moveToNext();
+
+
+    // Get Table Comment
+    public ArrayList getAllComment() {
+
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from Comment",null);
+
+        //if condition to sure the table is not empty
+       if (res.moveToFirst()) {
+           while (res.isAfterLast() == false) {
+               arrayList.add(res.getString(res.getColumnIndex("Comment_Num")));
+               arrayList.add(res.getString(res.getColumnIndex("Sender")));
+               arrayList.add(res.getString(res.getColumnIndex("Receiver")));
+               arrayList.add(res.getString(res.getColumnIndex("Content")));
+               arrayList.add(res.getInt(res.getColumnIndex("Date")));
+               res.moveToNext();
+           }
+       }
+        return arrayList;
+    }
+
+    // Get Table Context Filtering Rate
+    public ArrayList getAllContextFilteringRate() {
+
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from ContextFilteringRate",null);
+
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("Item_ID")));
+                arrayList.add(res.getString(res.getColumnIndex("Person_ID")));
+                arrayList.add(res.getDouble(res.getColumnIndex("Rate")));
+
+                res.moveToNext();
+            }
+        }
+        return arrayList;
+    }
+
+    // Get Table Guide Tourism
+    public ArrayList getAllGuideTourism() {
+
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from GuideTourism",null);
+
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("ID")));
+                arrayList.add(res.getString(res.getColumnIndex("First_Name")));
+                arrayList.add(res.getString(res.getColumnIndex("Last_Name")));
+                arrayList.add(res.getString(res.getColumnIndex("User_Name")));
+                arrayList.add(res.getString(res.getColumnIndex("Profile")));
+                arrayList.add(res.getString(res.getColumnIndex("Phone_Num")));
+                arrayList.add(res.getString(res.getColumnIndex("Email")));
+                arrayList.add(res.getDouble(res.getColumnIndex("Rate")));
+
+                res.moveToNext();
+            }
+        }
+        return arrayList;
+    }
+
+    // Get Table Guide Tourism Plan
+    public ArrayList getAllGuideTourismPlan() {
+
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from GuideTourismPlan",null);
+
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("Guide_ID")));
+                arrayList.add(res.getString(res.getColumnIndex("Plan_ID")));
+                arrayList.add(res.getInt(res.getColumnIndex("Plan_Num")));
+                arrayList.add(res.getString(res.getColumnIndex("Description")));
+                arrayList.add(res.getInt(res.getColumnIndex("Retrievable")));
+                arrayList.add(res.getInt(res.getColumnIndex("Return_Days")));
+                arrayList.add(res.getString(res.getColumnIndex("Adequte")));
+                arrayList.add(res.getInt(res.getColumnIndex("Duration_Of_Tourism")));
+                arrayList.add(res.getDouble(res.getColumnIndex("Price")));
+                arrayList.add(res.getDouble(res.getColumnIndex("Rate")));
+                arrayList.add(res.getInt(res.getColumnIndex("Deleted")));
+                res.moveToNext();
+            }
         }
         return arrayList;
     }
 
 
-    // Delete Comment_Num from Table Comment
-public void deleteRowComment_Num(String CommentNum){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("delete from Comment where Comment_Num = CommentNum ");
-}
+    // Get Table Place
+    public ArrayList getAllPlace() {
 
-//
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from Place",null);
 
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("Plan_ID")));
+                arrayList.add(res.getInt(res.getColumnIndex("Location")));
+                arrayList.add(res.getString(res.getColumnIndex("Tourist_name")));
+                arrayList.add(res.getString(res.getColumnIndex("Description")));
+                arrayList.add(res.getInt(res.getColumnIndex("Start_Date")));
+                arrayList.add(res.getInt(res.getColumnIndex("End_Date")));
+
+                res.moveToNext();
+            }
+        }
+        return arrayList;
+    }
+
+
+    // Get Previous Trip
+    public ArrayList getAllPreviousTrip() {
+
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from PreviousTrip",null);
+
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("Plan_ID")));
+                arrayList.add(res.getInt(res.getColumnIndex("Location")));
+                arrayList.add(res.getString(res.getColumnIndex("Tourist_name")));
+                arrayList.add(res.getString(res.getColumnIndex("Description")));
+                arrayList.add(res.getInt(res.getColumnIndex("Start_Date")));
+                arrayList.add(res.getInt(res.getColumnIndex("End_Date")));
+
+                res.moveToNext();
+            }
+        }
+        return arrayList;
+    }
+
+    // Get Rate Person
+    public ArrayList getAllRatePerson() {
+
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from RatePerson",null);
+
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("Person_ID")));
+                arrayList.add(res.getDouble(res.getColumnIndex("Rate")));
+
+                res.moveToNext();
+            }
+        }
+        return arrayList;
+    }
+
+    // Get Rate Place
+    public ArrayList getAllRatePlace() {
+
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from RatePlace",null);
+
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("Person_ID")));
+                arrayList.add(res.getDouble(res.getColumnIndex("Rate")));
+
+                res.moveToNext();
+            }
+        }
+        return arrayList;
+    }
+
+    // Get Rate Plan
+    public ArrayList getAllRatePlan() {
+
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from RatePlan",null);
+
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("Person_ID")));
+                arrayList.add(res.getString(res.getColumnIndex("Plan_ID")));
+                arrayList.add(res.getDouble(res.getColumnIndex("Rate")));
+
+                res.moveToNext();
+            }
+        }
+        return arrayList;
+    }
+
+    // Get Reservation
+    public ArrayList getAllReservation() {
+
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from Reservation",null);
+
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("Reservation_Num")));
+                arrayList.add(res.getString(res.getColumnIndex("Guide_Tourism_ID")));
+                arrayList.add(res.getString(res.getColumnIndex("Tourist_ID")));
+                arrayList.add(res.getString(res.getColumnIndex("Plan_ID")));
+                arrayList.add(res.getInt(res.getColumnIndex("Date")));
+                arrayList.add(res.getDouble(res.getColumnIndex("Price")));
+
+                res.moveToNext();
+            }
+        }
+        return arrayList;
+    }
+
+    // Get Tourist
+    public ArrayList getAllTourist() {
+
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from Tourist",null);
+
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("ID")));
+                arrayList.add(res.getString(res.getColumnIndex("First_Name")));
+                arrayList.add(res.getString(res.getColumnIndex("Last_Name")));
+                arrayList.add(res.getString(res.getColumnIndex("User_Name")));
+                arrayList.add(res.getInt(res.getColumnIndex("Birthday")));
+                arrayList.add(res.getString(res.getColumnIndex("Phone_Num")));
+                arrayList.add(res.getString(res.getColumnIndex("Email")));
+
+
+                res.moveToNext();
+            }
+        }
+        return arrayList;
+    }
 
 
 
