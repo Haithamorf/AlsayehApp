@@ -3,12 +3,15 @@ package com.example.alsayehapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -17,6 +20,7 @@ import java.util.Calendar;
 
 public class signUp extends AppCompatActivity {
     private static final String Tag= "signUp";
+    private Button mBackUserType,mNextInterest;
 
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -50,5 +54,27 @@ public class signUp extends AppCompatActivity {
                 mDisplayDate.setText(date);
             }
         };
+        setContentView(R.layout.activity_sign_up);
+        mBackUserType = (Button) findViewById(R.id.backBtn);
+        mNextInterest = (Button) findViewById(R.id.nextBtn);
+
+        mBackUserType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(signUp.this, userType.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+        });
+        mNextInterest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(signUp.this, interest.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+        });
     }
-}
+    }

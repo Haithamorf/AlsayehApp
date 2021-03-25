@@ -11,6 +11,8 @@
         android:theme="@style/Theme.AlsayehApp">
         <activity android:name=".userType"></activity>
         <activity android:name=".signUp" />
+        <activity android:name=".submit"/>
+        <activity android:name=".interest"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
