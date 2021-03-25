@@ -13,9 +13,9 @@ public class DBConnection extends SQLiteOpenHelper {
 
 
       public static final String DbName = "Al-Sayeh.db"; //database name
-    public static final int Verson = 1; // Verson number
+    public static final int DbVersion = 1; // Version number
     public DBConnection(Context context){
-        super(context,DbName,null,Verson);
+        super(context,DbName,null,DbVersion);
     }
 
     @Override
@@ -871,6 +871,29 @@ public void deleteContextFilteringRate(String Person_ID){
         return arrayList;
     }
 
+
+    //Get Row Comment by Comment_Num
+    public ArrayList GetRowComment(String Comment_Num){
+        ArrayList arrayList =new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from Tourist where Comment_Num=? ", new String[]{Comment_Num}); //?
+        //if condition to sure the table is not empty
+        if (res.moveToFirst()) {
+            while (res.isAfterLast() == false) {
+                arrayList.add(res.getString(res.getColumnIndex("ID")));
+                arrayList.add(res.getString(res.getColumnIndex("First_Name")));
+                arrayList.add(res.getString(res.getColumnIndex("Last_Name")));
+                arrayList.add(res.getString(res.getColumnIndex("User_Name")));
+                arrayList.add(res.getInt(res.getColumnIndex("Birthday")));
+                arrayList.add(res.getString(res.getColumnIndex("Phone_Num")));
+                arrayList.add(res.getString(res.getColumnIndex("Email")));
+
+
+                res.moveToNext();
+            }
+        }
+        return arrayList;
+    }
 
 
 }
