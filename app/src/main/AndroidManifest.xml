@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AlsayehApp">
-        <activity android:name=".tourGuideHomePage"></activity>
+        <activity android:name=".menu"></activity>
+        <activity android:name=".tourGuideHomePage" />
         <activity android:name=".ForgetPasswordActivity" />
         <activity android:name=".userType" />
         <activity android:name=".signUp" />
